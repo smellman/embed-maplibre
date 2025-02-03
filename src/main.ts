@@ -6,8 +6,10 @@ const queryString = window.location.search
 const params = new URLSearchParams(queryString)
 
 const style: string = params.get('style') || 'https://demotiles.maplibre.org/style.json'
-const center: [number, number] = [parseFloat(params.get('lng') || '140.084556'), parseFloat(params.get('lat') || '36.104611')]
-const zoom: number = parseFloat(params.get('zoom') || '16')
+const geoUri: string = params.get('geoUri') || 'geo:36.104611,140.084556?z=16'
+const [latitude, longitude] = geoUri.match(/geo:(.*),(.*)/)!.slice(1).map(parseFloat) as [number, number]
+const center: [number, number] = [longitude, latitude]
+const zoom: number = geoUri.match(/z=(\d+)/) ? parseFloat(geoUri.match(/z=(\d+)/)![1]) : 16
 const pitch: number = parseFloat(params.get('pitch') || '0')
 
 const map = new Map({

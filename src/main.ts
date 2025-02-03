@@ -26,7 +26,7 @@ const marker = new Marker()
   .addTo(map)
 const popup = new Popup()
   .setHTML(`
-    <a href="https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=${zoom}" target="_blank">Open OpenStreetMap</a><br />
+    <a href="https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=${parseInt(zoom)}" target="_blank">Open OpenStreetMap</a><br />
     <a href="https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}" target="_blank">Open Google Maps</a>
   `)
 marker.setPopup(popup)

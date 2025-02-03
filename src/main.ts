@@ -1,6 +1,6 @@
 import './style.css'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { GlobeControl, Map, Marker, NavigationControl } from 'maplibre-gl'
+import { GlobeControl, Map, Marker, NavigationControl, Popup } from 'maplibre-gl'
 
 const queryString = window.location.search
 const params = new URLSearchParams(queryString)
@@ -21,6 +21,12 @@ const map = new Map({
 })
 map.addControl(new NavigationControl())
 map.addControl(new GlobeControl())
-new Marker()
+const marker = new Marker()
   .setLngLat(center)
   .addTo(map)
+const popup = new Popup()
+  .setHTML(`
+    <a href="https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}&zoom=${zoom}" target="_blank">Open OpenStreetMap</a><br />
+    <a href="https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}" target="_blank">Open Google Maps</a>
+  `)
+marker.setPopup(popup)
